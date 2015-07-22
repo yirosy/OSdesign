@@ -10,4 +10,4 @@
 	函数：keyboard_read(TTY* p_tty)
 	行：186
 	错误：alt_r打成了alt_l
-	错误：alt+fn组合键与ubuntu组合键冲突，不利于调试，改为alt+F5前一个试图，alt+F6后一个试图
+	错误：alt额外产生了一个break，原因不明，暂时使用shift来实现试图切换
