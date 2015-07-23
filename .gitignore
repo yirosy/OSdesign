@@ -1,1 +1,6 @@
-/test
+src/boot/boot.bin
+src/boot/loader.bin
+src/lib/orangescrt.a
+src/kernel.bin
+src/krnl.map
+src/a.img

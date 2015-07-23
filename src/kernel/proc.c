@@ -33,7 +33,7 @@ PRIVATE int  deadlock(int src, int dest);
 PUBLIC void schedule()
 {
 	struct proc*	p;
-	int		greatest_ticks = 0;
+	/*int		greatest_ticks = 0;
 
 	while (!greatest_ticks) {
 		for (p = &FIRST_PROC; p <= &LAST_PROC; p++) {
@@ -49,6 +49,30 @@ PUBLIC void schedule()
 			for (p = &FIRST_PROC; p <= &LAST_PROC; p++)
 				if (p->p_flags == 0)
 					p->ticks = p->priority;
+	}*/
+	struct proc*	next_p;
+	int	min_ticks = MAX_TICKS;
+
+	while (min_ticks == MAX_TICKS) {
+		for (p = p_proc_ready+ 1; p != p_proc_ready; p= p== &LAST_PROC?  &FIRST_PROC : p + 1) {
+			if (p->p_flags == 0) {
+				if (p->ticks != 0 && p->ticks< min_ticks) {
+					min_ticks = p->ticks;
+					next_p= p;
+					
+				}
+			}
+		}
+
+		if (min_ticks == MAX_TICKS) {
+			for (p = &FIRST_PROC; p <= &LAST_PROC; p++)
+				if (p->p_flags == 0) {
+					p->priority= p->priority== 60? p->priority : p->priority* 2;
+					p->ticks = p->priority;
+				}	
+		}
+		else
+			p_proc_ready = next_p;
 	}
 }
 

@@ -50,14 +50,15 @@ PUBLIC int kernel_main()
                         priv	= PRIVILEGE_TASK;
                         rpl     = RPL_TASK;
                         eflags  = 0x1202;/* IF=1, IOPL=1, bit 2 is always 1 */
-			prio    = 15;
+			prio    = 15 ;
+
                 }
                 else {                  /* USER PROC */
                         t	= user_proc_table + (i - NR_TASKS);
                         priv	= PRIVILEGE_USER;
                         rpl     = RPL_USER;
                         eflags  = 0x202;	/* IF=1, bit 2 is always 1 */
-			prio    = 5;
+			prio    = 15;
                 }
 
 		strcpy(p->name, t->name);	/* name of the process */
@@ -103,7 +104,8 @@ PUBLIC int kernel_main()
 		p->regs.esp	= (u32)stk;
 		p->regs.eflags	= eflags;
 
-		p->ticks = p->priority = prio;
+		p->startwait= 0;
+		p->ticks = p->priority = prio ;
 
 		p->p_flags = 0;
 		p->p_msg = 0;
@@ -371,7 +373,7 @@ void TestB()
 
 	for(;;){
 		printf("B");
-		milli_delay(300);
+		milli_delay(500);
 	};
 }
 
@@ -388,7 +390,7 @@ void TestC()
 
 	for(;;){
 		printf("C");
-		milli_delay(1500);
+		milli_delay(500);
 	};
 }
 
