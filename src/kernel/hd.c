@@ -190,7 +190,7 @@ PRIVATE void hd_rdwt(MESSAGE * p)
 	cmd.device	= MAKE_DEVICE_REG(1, drive, (sect_nr >> 24) & 0xF);
 	cmd.command	= (p->type == DEV_READ) ? ATA_READ : ATA_WRITE;
 	hd_cmd_out(&cmd);
-
+	printl("%c", 0);
 	int bytes_left = p->CNT;
 	void * la = (void*)va2la(p->PROC_NR, p->BUF);
 
