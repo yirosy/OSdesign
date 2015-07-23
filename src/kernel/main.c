@@ -124,6 +124,7 @@ PUBLIC int kernel_main()
 
 	p_proc_ready	= proc_table;
 
+
 	init_clock();
         init_keyboard();
 
@@ -312,7 +313,7 @@ void Init()
 	untar("/cmd.tar");
 			
 
-	char * tty_list[] = {"/dev_tty1", "/dev_tty2"};
+	char * tty_list[] = {"/dev_tty2"};
 
 	int i;
 	for (i = 0; i < sizeof(tty_list) / sizeof(tty_list[0]); i++) {
@@ -344,8 +345,17 @@ void Init()
                                TestA
  *======================================================================*/
 void TestA()
-{
-	for(;;);
+{	
+	/*char tty_name[] ="/dev_tty1";
+	int fd_stdin  = open(tty_name, O_RDWR);
+	assert(fd_stdin  == 0);
+	int fd_stdout = open(tty_name, O_RDWR);
+	assert(fd_stdout == 1);*/
+
+	for(;;) {
+		/*printf("A");
+		milli_delay(300);*/
+	};
 }
 
 /*======================================================================*
@@ -353,7 +363,16 @@ void TestA()
  *======================================================================*/
 void TestB()
 {
-	for(;;);
+	char tty_name[] ="/dev_tty1";
+	int fd_stdin  = open(tty_name, O_RDWR);
+	assert(fd_stdin  == 0);
+	int fd_stdout = open(tty_name, O_RDWR);
+	assert(fd_stdout == 1);
+
+	for(;;){
+		printf("B");
+		milli_delay(300);
+	};
 }
 
 /*======================================================================*
@@ -361,7 +380,16 @@ void TestB()
  *======================================================================*/
 void TestC()
 {
-	for(;;);
+	char tty_name[] ="/dev_tty1";
+	int fd_stdin  = open(tty_name, O_RDWR);
+	assert(fd_stdin  == 0);
+	int fd_stdout = open(tty_name, O_RDWR);
+	assert(fd_stdout == 1);
+
+	for(;;){
+		printf("C");
+		milli_delay(1500);
+	};
 }
 
 /*****************************************************************************
